@@ -19,9 +19,8 @@ class MeliController extends Controller
      * @return View
      */
     public function connect(ViewFactory $view, string $state): View {
-        $service = new MeliApiService(config('meli.auth.client_id'), config('meli.auth.client_secret'), $state);
-        //$redirectUri = route('meli.token');
-        $redirectUri = 'https://globallogistics.com.br/meli/token';
+        $service = new MeliApiService($state);
+        $redirectUri = route('meli.token');
         $link = $service->getAuthUrl($redirectUri);
         return $view->make('meli::connect', compact('link'));
     }
@@ -33,7 +32,7 @@ class MeliController extends Controller
      * @return RedirectResponse
      */
     public function disconnect(ViewFactory $view, string $state): RedirectResponse {
-        $service = new MeliApiService(config('meli.auth.client_id'), config('meli.auth.client_secret'), $state);
+        $service = new MeliApiService($state);
         $service->disconnect();
         return redirect(route(config('meli.redirect_route')));
     }
@@ -45,9 +44,8 @@ class MeliController extends Controller
     public function token(Request $request): RedirectResponse {
         $code = $request->get('code');
         $state = $request->get('state');
-        $service = new MeliApiService(config('meli.auth.client_id'), config('meli.auth.client_secret'), $state);
-        //$redirectUri = route('meli.token');
-        $redirectUri = 'https://globallogistics.com.br/meli/token';
+        $service = new MeliApiService($state);
+        $redirectUri = route('meli.token');
         $authorize = $service->authorize($code, $redirectUri);
         if($authorize->httpCode != 200) {
             throw new Exception($authorize->body->message);
