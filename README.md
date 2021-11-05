@@ -165,7 +165,9 @@ dd($order->response);
 
 ## Automatic token refreshing
 
-The auth token last for 6 hours after its creation. After this, the auth token expires and a new one will be automatically requested using the *refresh token* before your performing query.
+The auth token last for 6 hours after its creation. After this, the auth token expires and a new one will be automatically generated using the *refresh token* before sending you query.
+
+The _auth token_ refreshing is automatic and no user action is required.
 
 In other hand, the *refresh token* will expire after 6 months and the user MUST log in again to grab a fresh new one. 
 
