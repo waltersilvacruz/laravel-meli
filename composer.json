@@ -1,0 +1,36 @@
+{
+    "name": "waltersilvacruz/laravel-meli",
+    "description": "A Laravel wrapper for Mercado Livre Rest API",
+    "keywords": ["laravel", "mercadolivre", "mercadolibre", "api", "rest"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Walter Cruz",
+            "email": "walter@tnx.com.br"
+        }
+    ],
+    "require": {
+        "php": "^7.2|^8.0",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "WebDEV\\Meli\\": "src/"
+        }
+    },
+    "autoload-dev": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WebDEV\\Meli\\MeliServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
