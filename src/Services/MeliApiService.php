@@ -23,13 +23,11 @@ class MeliApiService
     /**
      * Constructor
      *
-     * @param string $authClientId
-     * @param string $authClientSecret
      * @param string $state
      */
-    public function __construct(string $authClientId, string $authClientSecret, string $state) {
-        $this->authClientId = $authClientId;
-        $this->authClientSecret = $authClientSecret;
+    public function __construct(string $state) {
+        $this->authClientId = config('meli.auth.client_id');
+        $this->authClientSecret = config('meli.auth.client_secret');
         $this->state = $state;
         $this->repository = new MeliAppTokenRepository();
         $this->token = $this->repository->find($state);
@@ -79,7 +77,8 @@ class MeliApiService
                 'state' => $this->state,
                 'access_token' => $query->response->access_token,
                 'access_token_expires_at' => date('Y-m-d H:i:s', time() + $query->response->expires_in),
-                'refresh_token' => $query->response->refresh_token
+                'refresh_token' => $query->response->refresh_token,
+                'refresh_token_expires_at' => Carbon::now()->addMonths(6)->format('Y-m-d H:i:s')
             ]);
             $this->token = $token;
         }
