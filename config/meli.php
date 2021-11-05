@@ -12,7 +12,7 @@ return [
 
     'auth' => [
         'client_id'     => env('MELI_APP_ID'),
-        'client_secret' => env('MELI_APP_SECRET'),
+        'client_secret' => env('MELI_CLIENT_SECRET'),
     ],
 
     /*
