@@ -125,6 +125,9 @@ class MeliApiService
      * Disconnect from Mercado Livre
      */
     public function disconnect(): void {
+        $queryUser = $this->get('/users/me');
+        $userId = $queryUser->response->id;
+        $queryDelete = $this->delete("/users/{$userId}/applications/{$this->authClientId}");
         $this->repository->delete($this->state);
     }
 
