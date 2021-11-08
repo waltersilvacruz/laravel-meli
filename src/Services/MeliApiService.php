@@ -5,6 +5,7 @@ namespace WebDEV\Meli\Services;
 use Carbon\Carbon;
 use Exception;
 use stdClass;
+use WebDEV\Meli\Databases\Models\MeliAppToken;
 use WebDEV\Meli\Databases\Repositories\MeliAppTokenRepository;
 use WebDEV\Meli\Enumerators\AuthEnum;
 
@@ -136,6 +137,14 @@ class MeliApiService
      */
     public function isConnected(): bool {
         return $this->token->access_token ?? false;
+    }
+
+    /**
+     * Return the current token
+     * @return MeliAppToken
+     */
+    public function getToken(): MeliAppToken {
+        return $this->token;
     }
 
     /**
