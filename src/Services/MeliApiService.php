@@ -316,4 +316,15 @@ class MeliApiService
         }
         return $uri;
     }
+
+    /**
+     * Create a new test user
+     * @param $siteId
+     * @return stdClass
+     * @throws Exception
+     */
+    public function createTestUser($siteId): stdClass {
+        $data = [ 'site_id' => strtoupper($siteId) ];
+        return $this->post('/users/test_user', $data);
+    }
 }

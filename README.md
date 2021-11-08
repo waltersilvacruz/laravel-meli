@@ -163,6 +163,47 @@ $order = $service->get('/orders/768570754');
 dd($order->response);
 ```
 
+## Command line utility
+
+This package comes with a utility command to help you create test users on MercadoLibre.
+
+```bash
+php artian meli:create-test-user [state] [site]
+```
+
+You can use one of the following options for the [site] parameter:
+
+```
+MLA = Argentina
+MLB = Brazil
+MCO = Colombia
+MCR = Costa Rica
+MEC = Ecuador
+MLC = Chile
+MLM = Mexico
+MLU = Uruguay
+MLV = Venezuela
+MPA = Panama
+MPE = Peru
+MPT = Portugal
+MRD = Dominican Republic
+```
+
+Example:
+
+```bash
+php artisan meli:create-test-user "1281300c-a19c-42e7-9de8-6d0badccc9ad" MLB
+
+// Sample output:
+Creating new test user...
+DONE! New user created successfully:
+
+ID: 1014941445
+Nickname: TESTYTEZPVLJ
+Password: qatest2911
+Email: test_user_60793708@testuser.com
+```
+
 ## Automatic token refreshing
 
 The auth token last for 6 hours after its creation. After this, the auth token expires and a new one will be automatically generated using the *refresh token* before sending you query.

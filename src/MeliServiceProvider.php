@@ -4,6 +4,7 @@ namespace WebDEV\Meli;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use WebDEV\Meli\Console\Commands\MeliCreateTestUser;
 use WebDEV\Meli\Databases\Repositories\MeliAppTokenRepository;
 
 class MeliServiceProvider extends BaseServiceProvider {
@@ -45,6 +46,10 @@ class MeliServiceProvider extends BaseServiceProvider {
             $this->publishes([
                 __DIR__ . '/../resources/views' => base_path('resources/views/vendor/meli'),
             ], 'meli-views');
+
+            $this->commands([
+                MeliCreateTestUser::class
+            ]);
         }
     }
 
