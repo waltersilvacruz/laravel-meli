@@ -115,10 +115,12 @@ class MeliApiService
             }
             return $query;
         } else {
-            $ret = new stdClass();
-            $ret->error = 'Offline-Access is not allowed.';
-            $ret->httpCode = null;
-            return $ret;
+            return (object) [
+                'response' => [
+                    'message' => 'Offline-Access is not allowed.'
+                ],
+                'httpCode' => 400
+            ];
         }
     }
 
