@@ -25,13 +25,24 @@ class MeliApiService
      * Constructor
      *
      * @param string $state
+     * @param array $credentials
      */
-    public function __construct(string $state) {
-        $this->authClientId = config('meli.auth.client_id');
-        $this->authClientSecret = config('meli.auth.client_secret');
+    public function __construct(string $state, array $credentials = []) {
+        $this->authClientId = $credentials['clientId'] ?? config('meli.auth.client_id');
+        $this->authClientSecret = $credentials['clientSecret'] ?? config('meli.auth.client_secret');
         $this->state = $state;
         $this->repository = new MeliAppTokenRepository();
         $this->token = $this->repository->find($state);
+    }
+
+    /**
+     * Method to set client ID & secret on the fly
+     *
+     * @param array $credentials
+     */
+    public function setCredentials(array $credentials = []) {
+        $this->authClientId = $credentials['clientId'] ?? null;
+        $this->authClientSecret = $credentials['clientSecret'] ?? null;
     }
 
     /**

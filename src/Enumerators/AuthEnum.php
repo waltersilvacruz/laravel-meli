@@ -16,6 +16,7 @@ class AuthEnum {
     const MPE = 'https://auth.mercadolibre.com.pe'; // Peru
     const MPT = 'https://auth.mercadolibre.com.pt'; // Portugal
     const MRD = 'https://auth.mercadolibre.com.do'; // Dominican Republic
+    const CBT = 'https://global-selling.mercadolibre.com'; // Global Selling
 
     public static function toArray(): array {
         return [
@@ -32,6 +33,7 @@ class AuthEnum {
             self::MPE => 'Peru',
             self::MPT => 'Portugal',
             self::MRD => 'Dominican Republic',
+            self::CBT => 'Global Selling',
         ];
     }
 }
