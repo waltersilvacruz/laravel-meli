@@ -137,11 +137,15 @@ class MeliApiService
 
     /**
      * Disconnect from Mercado Livre
+     * @param bool $remote
+     * @throws Exception
      */
-    public function disconnect(): void {
-        $queryUser = $this->get('/users/me');
-        $userId = $queryUser->response->id;
-        $queryDelete = $this->delete("/users/{$userId}/applications/{$this->authClientId}");
+    public function disconnect(bool $remote = true): void {
+        if($remote) {
+            $queryUser = $this->get('/users/me');
+            $userId = $queryUser->response->id;
+            $this->delete("/users/{$userId}/applications/{$this->authClientId}");
+        }
         $this->repository->delete($this->state);
     }
 
