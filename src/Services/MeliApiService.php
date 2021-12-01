@@ -250,6 +250,23 @@ class MeliApiService
     }
 
     /**
+     * Download file
+     *
+     * @param string $path
+     * @param array $params
+     * @param boolean $assoc
+     * @return stdClass
+     * @throws Exception
+     */
+    public function download(string $path, array $params = [], bool $assoc = false): stdClass {
+        $opts = [
+            CURLOPT_HTTPHEADER => $this->bearerHeader(),
+            CURLOPT_RETURNTRANSFER => 1
+        ];
+        return $this->execute($path, $opts, $params, $assoc);
+    }
+
+    /**
      * Execute all requests and returns the json body and headers
      *
      * @param string $path
@@ -266,7 +283,7 @@ class MeliApiService
         $options = $opts + $defaultOpts;
         curl_setopt_array($ch, $options);
         $return = new stdClass();
-        $return->response = json_decode(curl_exec($ch), $assoc);
+        $return->response = isset($opts[CURLOPT_RETURNTRANSFER]) ? curl_exec($ch) : json_decode(curl_exec($ch), $assoc);
         $return->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
