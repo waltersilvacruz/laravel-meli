@@ -288,7 +288,7 @@ class MeliApiService
         curl_close($ch);
 
         // if refresh_token is invalid, delete token to force new login
-        if($return->httpCode == 400 && $return->response->error == 'invalid_grant') {
+        if($return->httpCode == 400 && isset($return->response) && !is_string($return->response) && $return->response?->error == 'invalid_grant') {
             $this->disconnect();
             throw new Exception($return->response->message);
         }
